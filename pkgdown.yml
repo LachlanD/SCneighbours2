@@ -1,8 +1,9 @@
 pandoc: 3.1.11
 pkgdown: 2.2.0
 pkgdown_sha: ~
-articles: {}
-last_built: 2026-01-21T00:19Z
+articles:
+  Get_Started: Get_Started.html
+last_built: 2026-01-21T01:06Z
 urls:
   reference: https://lachland.github.io/SCneighbours2/reference
   article: https://lachland.github.io/SCneighbours2/articles
