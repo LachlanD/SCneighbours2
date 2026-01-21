@@ -35,7 +35,8 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/Get_Started.html">Get_Started</a></li>
+<li><a class="dropdown-item" href="articles/Get_Started.html">Get Started</a></li>
+    <li><a class="dropdown-item" href="articles/Tutorial.html">Tutorial</a></li>
   </ul>
 </li>
       </ul>
@@ -55,88 +56,7 @@
 </h1></div>
 <p>Single-Cell Neighbourhood Exploration Tool</p>
 <p>Note: The functions are using the nearest-neighbour graph from the RNA assay (RNA_nn), PLEASE change to SCT_nn if you are using the SCT assay.</p>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>library(devtools)</p>
-<p>install_github(“<a href="https://github.com/CSI-Doherty/SCneighbours" class="external-link uri">https://github.com/CSI-Doherty/SCneighbours</a>”)</p>
-</div>
-<div class="section level2">
-<h2 id="technique-1-visualization-of-cell-neighbourhoods">Technique 1: Visualization of Cell Neighbourhoods<a class="anchor" aria-label="anchor" href="#technique-1-visualization-of-cell-neighbourhoods"></a>
-</h2>
-<p>For individual cells or cell groups, we visualize their cell neighbourhoods as either dots or density contours on a dimensionality reduction map, uncovering tightly interwoven or widely dispersed regions.</p>
-<p>This allows us to learn which clusters might need merging if they have largely overlapped neighbourhoods, and infer trajectory relationships of cells obscured by the reduction.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"visualize_neighbourhood_function.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># example usage</span></span>
-<span><span class="fu"><a href="reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, meta_data_column <span class="op">=</span> <span class="st">"seurat_clusters"</span>, meta_data_highlight <span class="op">=</span> <span class="st">"12"</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, density <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level2">
-<h2 id="technique-2-quantification-of-cell-neighbourhoods">Technique 2: Quantification of Cell Neighbourhoods<a class="anchor" aria-label="anchor" href="#technique-2-quantification-of-cell-neighbourhoods"></a>
-</h2>
-<p>For each cell, we quantify the distribution of its neighbouring cells by the variance in their coordinates, providing insights into the cell positioning in the reduction map.</p>
-<p>Large variance indicates diminished confidence in a cell’s positioning.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"quantify_neighbourhood_function.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># example usage</span></span>
-<span><span class="fu"><a href="reference/calculate_neighbour_distance_for_all_cells.html">calculate_neighbour_distance_for_all_cells</a></span><span class="op">(</span><span class="va">seu</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, colname <span class="op">=</span> <span class="st">"neighbourhood_variance"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level2">
-<h2 id="technique-3-complementary-reductions">Technique 3: Complementary reductions<a class="anchor" aria-label="anchor" href="#technique-3-complementary-reductions"></a>
-</h2>
-<p>The cell neighbourhoods can be explored across various dimensionality reductions for insights.</p>
-<p>For example, diffusion map and force-directed layout can provide clues about cell development by preserving the continuous cell transitioning trajectories.</p>
-</div>
-<div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h2>
-<p>Here we use 2 different PBMC datasets from SeuratData to demonstrate usage.</p>
-<pre><code><span><span class="fu">SeuratData</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/InstallData.html" class="external-link">InstallData</a></span><span class="op">(</span><span class="st">"ifnb"</span><span class="op">)</span></span>
-<span><span class="fu">SeuratData</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/InstallData.html" class="external-link">InstallData</a></span><span class="op">(</span><span class="st">"pbmc3k"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ifnb</span> <span class="op">&lt;-</span> <span class="fu">SeuratData</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/LoadData.html" class="external-link">LoadData</a></span><span class="op">(</span><span class="st">"ifnb"</span><span class="op">)</span></span>
-<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu">SeuratData</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/LoadData.html" class="external-link">LoadData</a></span><span class="op">(</span><span class="st">"pbmc3k"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ifnb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">ifnb</span>, <span class="va">stim</span> <span class="op">==</span> <span class="st">'CTRL'</span><span class="op">)</span></span></code></pre>
-<p>The PBMCs are merged without integration and Run through a standard pipeline to generate a nearest neighbour graph, clusters, and UMAP reduction.</p>
-<pre><code><span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">ifnb</span>, <span class="va">pbmc</span><span class="op">)</span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">NormalizeData</span><span class="op">(</span><span class="va">seu</span><span class="op">)</span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">FindVariableFeatures</span><span class="op">(</span><span class="va">seu</span><span class="op">)</span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">ScaleData</span><span class="op">(</span><span class="va">seu</span><span class="op">)</span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">RunPCA</span><span class="op">(</span><span class="va">seu</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">FindNeighbors</span><span class="op">(</span><span class="va">seu</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">FindClusters</span><span class="op">(</span><span class="va">seu</span>, resolution <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu">RunUMAP</span><span class="op">(</span><span class="va">seu</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span></span></code></pre>
-<p><img src="reference/figures/5a50c439-2851-4566-b4f6-8d889b42e404.png" alt="Example UMAP"><img src="reference/figures/6d470ce6-5f3b-45d7-aac5-1104a38306c3.png" alt="CD3 UMAP"></p>
-<pre><code><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">seu</span>, group.by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"orig.ident"</span>, <span class="st">"seurat_clusters"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">FeaturePlot</span><span class="op">(</span><span class="va">seu</span>, <span class="st">"CD3E"</span><span class="op">)</span></span></code></pre>
-<p>Here the T cells are split into 2 clusters for the seperate datasets.</p>
-<p>Using SC neighbours we can see that there is neighbourhood sharing between the 2 seperate T cell clusters.</p>
-<pre><code><span><span class="fu"><a href="reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, meta_data_column <span class="op">=</span> <span class="st">'seurat_clusters'</span>, meta_data_highlight <span class="op">=</span> <span class="fl">1</span>, <span class="st">'umap'</span>, density <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu"><a href="reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, meta_data_column <span class="op">=</span> <span class="st">'seurat_clusters'</span>, meta_data_highlight <span class="op">=</span> <span class="fl">1</span>, <span class="st">'umap'</span>, density <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">'seurat_clusters'</span>, <span class="fl">2</span>, density <span class="op">=</span> <span class="cn">T</span>, percent <span class="op">=</span> <span class="fl">90</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu"><a href="reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">'seurat_clusters'</span>, <span class="fl">2</span>, density <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre>
-<p><img src="reference/figures/f3d27916-5923-4a63-81f6-4f2ca9c5587b.png" alt="Cluster 1 neighbourhoood"><img src="reference/figures/d4e4f029-6729-40d5-abba-015398fb2b0a.png" alt="Cluster 2 neighbourhoood"></p>
-<p>A heatmap showing all neighbourhood sharing of clusters can be generated with visualise_neighbour_percentage.</p>
-<pre><code><span><span class="fu"><a href="reference/visualise_neighbour_percentage.html">visualise_neighbour_percentage</a></span><span class="op">(</span>seu <span class="op">=</span> <span class="va">seu</span>, graph <span class="op">=</span> <span class="st">'RNA_nn'</span>, meta_data_column <span class="op">=</span> <span class="st">'seurat_clusters'</span><span class="op">)</span></span></code></pre>
-<div class="float">
-<img src="reference/figures/90951f5b-ea10-4cf6-8c51-60d88cd4be62.png" alt="Heatmap Example"><div class="figcaption">Heatmap Example</div>
-</div>
-<p>For each cell we can calculate the percentage of cells from its neighbours share the cells cluster (or other metadata column).</p>
-<pre><code><span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/calculate_outside_neighbours_cell.html">calculate_outside_neighbours_cell</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">'seurat_clusters'</span>,colname <span class="op">=</span> <span class="st">'outside_neighbourhood'</span><span class="op">)</span></span>
-<span><span class="fu">FeaturePlot</span><span class="op">(</span><span class="va">seu</span>, <span class="va">outside_neighbourhood</span><span class="op">)</span></span></code></pre>
-<div class="float">
-<img src="reference/figures/823f2a7f-3fbc-477d-8be8-e9a472dae282.png" alt="Outside neighbours"><div class="figcaption">Outside neighbours</div>
-</div>
-<p>Here we see can see the high percentage cells form the boundaries between clusters, even when those boundaries don’t appear close together on the UMAP.</p>
-<p>For each cell we can calculate the variance in the distance to it it neighbours based on a reductions embeddings. This can be useful to see if there are any problems with your UMAP or there are some problamtic cells in your dataset.</p>
-<pre><code><span><span class="va">seu</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/calculate_neighbour_distance_for_all_cells.html">calculate_neighbour_distance_for_all_cells</a></span><span class="op">(</span><span class="va">seu</span>, reduction <span class="op">=</span> <span class="st">'umap'</span>, colname <span class="op">=</span> <span class="st">'neighbour_distance'</span><span class="op">)</span></span>
-<span><span class="fu">FeaturePlot</span><span class="op">(</span><span class="va">seu</span>, <span class="st">'neighbour_distance'</span><span class="op">)</span></span></code></pre>
-</div>
+<p><a href="https://lachland.github.io/SCneighbours2/">SCneighbours Homepage</a></p>
 </div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>

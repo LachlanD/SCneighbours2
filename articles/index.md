@@ -2,4 +2,6 @@
 
 ### All vignettes
 
-- [Get_Started](https://lachland.github.io/SCneighbours2/articles/Get_Started.md):
+- [Get
+  Started](https://lachland.github.io/SCneighbours2/articles/Get_Started.md):
+- [Tutorial](https://lachland.github.io/SCneighbours2/articles/Tutorial.md):
