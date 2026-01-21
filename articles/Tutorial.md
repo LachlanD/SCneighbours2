@@ -153,7 +153,13 @@ cells in your dataset.
 
 ``` r
 seu <- calculate_neighbour_distance_for_all_cells(seu, reduction = 'umap', colname = 'neighbour_distance')
-FeaturePlot(seu, 'neighbour_distance', min.cutoff = 'q5', max.cutoff = 'q95')
+FeaturePlot(seu, 'neighbour_distance')
 ```
 
 ![](Tutorial_files/figure-html/unnamed-chunk-8-1.png)
+
+``` r
+FeaturePlot(seu, 'neighbour_distance', min.cutoff = 'q5', max.cutoff = 'q95')
+```
+
+![](Tutorial_files/figure-html/unnamed-chunk-8-2.png)
