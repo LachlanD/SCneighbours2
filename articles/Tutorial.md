@@ -146,7 +146,7 @@ visualise_neighbour_percentage(seu, graph = 'RNA_nn', meta_data_column = 'seurat
 
 ![](Tutorial_files/figure-html/unnamed-chunk-6-1.png)
 
-## Outside Neigbours
+## Outside Neighbours
 
 For each cell we can calculate the percentage of cells from its
 neighbours share the cells cluster (or other metadata column).
