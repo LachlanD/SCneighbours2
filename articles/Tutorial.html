@@ -64,6 +64,12 @@
 
     
     
+<p>I this tutorial we will use 2 different PBMC datasets from SeuratData
+to demonstrate usage.</p>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
+<p>Load the necessary libraries.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lachland.github.io/SCneighbours2/">SCneighbours</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span>
@@ -77,11 +83,12 @@
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, t</span></span></code></pre></div>
+</div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="load-data">Load Data<a class="anchor" aria-label="anchor" href="#load-data"></a>
 </h2>
-<p>Here we use 2 different PBMC datasets from SeuratData to demonstrate
-usage.</p>
+<p>We will use the 3k PBMCs and the control pbmcs from the interferon B
+datasets.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">SeuratData</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/InstallData.html" class="external-link">InstallData</a></span><span class="op">(</span><span class="st">"ifnb"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
@@ -114,6 +121,10 @@ usage.</p>
 <span><span class="co">#&gt; Warning: Assay RNA changing from Assay to Assay5</span></span>
 <span></span>
 <span><span class="va">ifnb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">ifnb</span>, <span class="va">stim</span> <span class="op">==</span> <span class="st">'CTRL'</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="seurat-analysis">Seurat Analysis<a class="anchor" aria-label="anchor" href="#seurat-analysis"></a>
+</h2>
 <p>The PBMCs are merged without integration and Run through a standard
 pipeline to generate a nearest neighbour graph, clusters, and UMAP
 reduction.</p>
@@ -154,8 +165,12 @@ reduction.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html" class="external-link">FeaturePlot</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">"CD3E"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Tutorial_files/figure-html/unnamed-chunk-4-2.png" class="r-plt" alt="" width="700"></p>
-<p>Here the T cells are split into 2 clusters for the seperate
-datasets.</p>
+<p>Here the T cells (CD3 positive) are split into 2 clusters for the
+separate datasets.</p>
+</div>
+<div class="section level2">
+<h2 id="visualize-neighbourhoods">Visualize Neighbourhoods<a class="anchor" aria-label="anchor" href="#visualize-neighbourhoods"></a>
+</h2>
 <p>Using SC neighbours we can see that there is neighbourhood sharing
 between the 2 seperate T cell clusters.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -167,11 +182,19 @@ between the 2 seperate T cell clusters.</p>
 <span><span class="fu"><a href="../reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">'seurat_clusters'</span>, <span class="fl">2</span>, density <span class="op">=</span> <span class="cn">T</span>, percent <span class="op">=</span> <span class="fl">90</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="fu"><a href="../reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">'seurat_clusters'</span>, <span class="fl">2</span>, density <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Tutorial_files/figure-html/unnamed-chunk-5-2.png" class="r-plt" alt="" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="generate-heatmap">Generate Heatmap<a class="anchor" aria-label="anchor" href="#generate-heatmap"></a>
+</h2>
 <p>A heatmap showing all neighbourhood sharing of clusters can be
 generated with visualise_neighbour_percentage.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/visualise_neighbour_percentage.html">visualise_neighbour_percentage</a></span><span class="op">(</span><span class="va">seu</span>, graph <span class="op">=</span> <span class="st">'RNA_nn'</span>, meta_data_column <span class="op">=</span> <span class="st">'seurat_clusters'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Tutorial_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="outside-neigbours">Outside Neigbours<a class="anchor" aria-label="anchor" href="#outside-neigbours"></a>
+</h2>
 <p>For each cell we can calculate the percentage of cells from its
 neighbours share the cells cluster (or other metadata column).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -181,6 +204,10 @@ neighbours share the cells cluster (or other metadata column).</p>
 <p>Here we see can see the high percentage cells form the boundaries
 between clusters, even when those boundaries don’t appear close together
 on the UMAP.</p>
+</div>
+<div class="section level2">
+<h2 id="neigbour-distance">Neigbour Distance<a class="anchor" aria-label="anchor" href="#neigbour-distance"></a>
+</h2>
 <p>For each cell we can calculate the variance in the distance to it it
 neighbours based on a reductions embeddings. This can be useful to see
 if there are any problems with your UMAP or there are some problamtic
@@ -193,7 +220,8 @@ cells in your dataset.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html" class="external-link">FeaturePlot</a></span><span class="op">(</span><span class="va">seu</span>, <span class="st">'neighbour_distance'</span>, min.cutoff <span class="op">=</span> <span class="st">'q5'</span>, max.cutoff <span class="op">=</span> <span class="st">'q95'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Tutorial_files/figure-html/unnamed-chunk-8-2.png" class="r-plt" alt="" width="700"></p>
 </div>
-  </main>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

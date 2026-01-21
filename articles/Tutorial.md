@@ -1,5 +1,12 @@
 # Tutorial
 
+I this tutorial we will use 2 different PBMC datasets from SeuratData to
+demonstrate usage.
+
+## Setup
+
+Load the necessary libraries.
+
 ``` r
 library(SCneighbours)
 library(Seurat)
@@ -15,10 +22,10 @@ library(Seurat)
 #>     intersect, t
 ```
 
-## Example
+## Load Data
 
-Here we use 2 different PBMC datasets from SeuratData to demonstrate
-usage.
+We will use the 3k PBMCs and the control pbmcs from the interferon B
+datasets.
 
 ``` r
 SeuratData::InstallData("ifnb")
@@ -53,6 +60,8 @@ pbmc <- SeuratData::LoadData("pbmc3k")
 
 ifnb <- subset(ifnb, stim == 'CTRL')
 ```
+
+## Seurat Analysis
 
 The PBMCs are merged without integration and Run through a standard
 pipeline to generate a nearest neighbour graph, clusters, and UMAP
@@ -103,7 +112,10 @@ FeaturePlot(seu, "CD3E")
 
 ![](Tutorial_files/figure-html/unnamed-chunk-4-2.png)
 
-Here the T cells are split into 2 clusters for the seperate datasets.
+Here the T cells (CD3 positive) are split into 2 clusters for the
+separate datasets.
+
+## Visualize Neighbourhoods
 
 Using SC neighbours we can see that there is neighbourhood sharing
 between the 2 seperate T cell clusters.
@@ -123,6 +135,8 @@ visualize_neighbourhood(seu, 'seurat_clusters', 2, density = F)
 
 ![](Tutorial_files/figure-html/unnamed-chunk-5-2.png)
 
+## Generate Heatmap
+
 A heatmap showing all neighbourhood sharing of clusters can be generated
 with visualise_neighbour_percentage.
 
@@ -131,6 +145,8 @@ visualise_neighbour_percentage(seu, graph = 'RNA_nn', meta_data_column = 'seurat
 ```
 
 ![](Tutorial_files/figure-html/unnamed-chunk-6-1.png)
+
+## Outside Neigbours
 
 For each cell we can calculate the percentage of cells from its
 neighbours share the cells cluster (or other metadata column).
@@ -145,6 +161,8 @@ FeaturePlot(seu, 'outside_neighbourhood')
 Here we see can see the high percentage cells form the boundaries
 between clusters, even when those boundaries don’t appear close together
 on the UMAP.
+
+## Neigbour Distance
 
 For each cell we can calculate the variance in the distance to it it
 neighbours based on a reductions embeddings. This can be useful to see
