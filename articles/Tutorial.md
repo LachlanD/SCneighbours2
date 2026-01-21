@@ -91,7 +91,7 @@ seu <- FindClusters(seu, resolution = 0.5)
 #> Running Louvain algorithm...
 #> Maximum modularity in 10 random starts: 0.9226
 #> Number of communities: 15
-#> Elapsed time: 0 seconds
+#> Elapsed time: 1 seconds
 
 
 seu <- RunUMAP(seu, dims = 1:30, reduction = "pca", verbose = F)
