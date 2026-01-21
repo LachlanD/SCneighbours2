@@ -162,7 +162,7 @@ Here we see can see the high percentage cells form the boundaries
 between clusters, even when those boundaries don’t appear close together
 on the UMAP.
 
-## Neigbour Distance
+## Neighbour Distance
 
 For each cell we can calculate the variance in the distance to it it
 neighbours based on a reductions embeddings. This can be useful to see
