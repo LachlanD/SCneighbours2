@@ -1,7 +1,7 @@
 # Tutorial
 
-I this tutorial we will use 2 different PBMC datasets from SeuratData to
-demonstrate usage.
+In this tutorial we will use 2 different PBMC datasets from SeuratData
+to demonstrate usage.
 
 ## Setup
 
@@ -91,7 +91,7 @@ seu <- FindClusters(seu, resolution = 0.5)
 #> Running Louvain algorithm...
 #> Maximum modularity in 10 random starts: 0.9226
 #> Number of communities: 15
-#> Elapsed time: 1 seconds
+#> Elapsed time: 0 seconds
 
 
 seu <- RunUMAP(seu, dims = 1:30, reduction = "pca", verbose = F)
@@ -117,7 +117,7 @@ separate datasets.
 
 ## Visualize Neighbourhoods
 
-Using SC neighbours we can see that there is neighbourhood sharing
+Using SCneighbours we can see that there is neighbourhood sharing
 between the 2 seperate T cell clusters.
 
 ``` r
