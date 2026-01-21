@@ -2,10 +2,15 @@
 
 Single-Cell Neighbourhood Exploration Tool
 
-Note: The functions are using the nearest-neighbour graph from the RNA
-assay (RNA_nn), PLEASE change to SCT_nn if you are using the SCT assay.
+Description
 
-[SCneighbours Homepage](https://lachland.github.io/SCneighbours2/)
+[Get
+Started](https://lachland.github.io/SCneighbours2/articles/Get_Started.html)
+
+[Tutorial with
+example](https://lachland.github.io/SCneighbours2/articles/Tutorial.html)
+
+[Link to article](https://lachland.github.io/SCneighbours2/)
 
 # Package index
 

@@ -64,13 +64,17 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lachland.github.io/SCneighbours2/">SCneighbours</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>library(devtools)</p>
-<p>install_github(“<a href="https://github.com/CSI-Doherty/SCneighbours" class="external-link uri">https://github.com/CSI-Doherty/SCneighbours</a>”)</p>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/CSI-Doherty/SCneighbours"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lachland.github.io/SCneighbours2/">SCneighbours</a></span><span class="op">)</span></span></code></pre>
+<p>Note: The functions are using the nearest-neighbour graph from the
+RNA assay (RNA_nn), PLEASE change to SCT_nn if you are using the SCT
+assay.</p>
 </div>
 <div class="section level2">
 <h2 id="technique-1-visualization-of-cell-neighbourhoods">Technique 1: Visualization of Cell Neighbourhoods<a class="anchor" aria-label="anchor" href="#technique-1-visualization-of-cell-neighbourhoods"></a>
@@ -82,10 +86,7 @@ regions.</p>
 <p>This allows us to learn which clusters might need merging if they
 have largely overlapped neighbourhoods, and infer trajectory
 relationships of cells obscured by the reduction.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"visualize_neighbourhood_function.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># example usage</span></span>
-<span><span class="fu"><a href="../reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">seu</span>, meta_data_column <span class="op">=</span> <span class="st">"seurat_clusters"</span>, meta_data_highlight <span class="op">=</span> <span class="st">"12"</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, density <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="fu"><a href="../reference/visualize_neighbourhood.html">visualize_neighbourhood</a></span><span class="op">(</span><span class="va">object</span>, meta_data_column <span class="op">=</span> <span class="st">"seurat_clusters"</span>, meta_data_highlight <span class="op">=</span> <span class="st">"12"</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, density <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="technique-2-quantification-of-cell-neighbourhoods">Technique 2: Quantification of Cell Neighbourhoods<a class="anchor" aria-label="anchor" href="#technique-2-quantification-of-cell-neighbourhoods"></a>
@@ -95,10 +96,7 @@ by the variance in their coordinates, providing insights into the cell
 positioning in the reduction map.</p>
 <p>Large variance indicates diminished confidence in a cell’s
 positioning.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"quantify_neighbourhood_function.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># example usage</span></span>
-<span><span class="fu"><a href="../reference/calculate_neighbour_distance_for_all_cells.html">calculate_neighbour_distance_for_all_cells</a></span><span class="op">(</span><span class="va">seu</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, colname <span class="op">=</span> <span class="st">"neighbourhood_variance"</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="fu"><a href="../reference/calculate_neighbour_distance_for_all_cells.html">calculate_neighbour_distance_for_all_cells</a></span><span class="op">(</span><span class="va">object</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, colname <span class="op">=</span> <span class="st">"neighbourhood_variance"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="technique-3-complementary-reductions">Technique 3: Complementary reductions<a class="anchor" aria-label="anchor" href="#technique-3-complementary-reductions"></a>

@@ -1,14 +1,15 @@
 # Get Started
 
-``` r
-library(SCneighbours)
-```
-
 ## Installation
 
-library(devtools)
+    library(devtools)
 
-install_github(“<https://github.com/CSI-Doherty/SCneighbours>”)
+    install_github("https://github.com/CSI-Doherty/SCneighbours")
+
+    library(SCneighbours)
+
+Note: The functions are using the nearest-neighbour graph from the RNA
+assay (RNA_nn), PLEASE change to SCT_nn if you are using the SCT assay.
 
 ## Technique 1: Visualization of Cell Neighbourhoods
 
@@ -21,10 +22,7 @@ This allows us to learn which clusters might need merging if they have
 largely overlapped neighbourhoods, and infer trajectory relationships of
 cells obscured by the reduction.
 
-    source("visualize_neighbourhood_function.R")
-
-    # example usage
-    visualize_neighbourhood(seu, meta_data_column = "seurat_clusters", meta_data_highlight = "12", reduction = "umap", density = T)
+    visualize_neighbourhood(object, meta_data_column = "seurat_clusters", meta_data_highlight = "12", reduction = "umap", density = T)
 
 ## Technique 2: Quantification of Cell Neighbourhoods
 
@@ -34,10 +32,7 @@ positioning in the reduction map.
 
 Large variance indicates diminished confidence in a cell’s positioning.
 
-    source("quantify_neighbourhood_function.R")
-
-    # example usage
-    calculate_neighbour_distance_for_all_cells(seu, reduction = "umap", colname = "neighbourhood_variance")
+    calculate_neighbour_distance_for_all_cells(object, reduction = "umap", colname = "neighbourhood_variance")
 
 ## Technique 3: Complementary reductions
 
