@@ -7,14 +7,21 @@ reduction map.
 ## Usage
 
 ``` r
-calculate_neighbour_distance_for_all_cells(seu, reduction, colname, graph)
+calculate_neighbour_distance_for_all_cells(
+  obj,
+  reduction = NULL,
+  colname,
+  graph = NULL
+)
 ```
 
 ## Arguments
 
-- seu:
+- obj:
 
-  The Seurat object.
+  A Seurat, SingleCellExperiment or SCNeighbours object containing
+  single-cell data. If in Seurat or SingleCellExperiment form will
+  firist be converted to SCneighbours format
 
 - reduction:
 
@@ -26,7 +33,9 @@ calculate_neighbour_distance_for_all_cells(seu, reduction, colname, graph)
 
 - graph:
 
-  Name of the nearest-neighbour graph to use from seu@graphs.
+  either a nearest neigbour graph in igraph, dgCMatrix or Seurat format,
+  or the name of a graph stored in the Seurat object. (e.g., "RNA_nn",
+  "RNA_snn", or "SCT_nn").
 
 ## Value
 

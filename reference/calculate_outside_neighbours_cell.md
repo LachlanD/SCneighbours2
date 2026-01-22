@@ -10,25 +10,25 @@ column in the Seurat object's metadata.
 
 ``` r
 calculate_outside_neighbours_cell(
-  seu,
+  obj,
   meta_data_column,
-  graph,
-  colname,
-  reduction = NULL
+  graph = "RNA_nn",
+  colname
 )
 ```
 
 ## Arguments
 
-- seu:
+- obj:
 
-  A Seurat object containing single-cell data with nearest-neighbour
-  graphs stored in the graphs slot.
+  A Seurat, SingleCellExperiment or SCNeighbours object containing
+  single-cell data. If in Seurat or SingleCellExperiment form will
+  firist be converted to SCneighbours format
 
 - meta_data_column:
 
-  Name of the column in seu@meta.data to pull values from for grouping
-  and analysis.
+  Name of the metadata column in the object to pull values from for
+  grouping and analysis.
 
 - graph:
 

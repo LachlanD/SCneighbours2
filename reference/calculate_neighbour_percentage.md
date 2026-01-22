@@ -8,20 +8,20 @@ what percentage of the neighbourhood belongs to each cell type.
 
 ``` r
 calculate_neighbour_percentage(
-  seu,
+  obj,
   meta_data_column,
   meta_data_highlight,
-  graph = "RNA_nn",
-  reduction = NULL
+  graph = "RNA_nn"
 )
 ```
 
 ## Arguments
 
-- seu:
+- obj:
 
-  A Seurat object containing single-cell data with nearest-neighbour
-  graphs stored in the graphs slot.
+  A Seurat, SingleCellExperiment or SCNeighbours object containing
+  single-cell data. If in Seurat or SingleCellExperiment form will
+  firist be converted to SCneighbours format
 
 - meta_data_column:
 
@@ -33,10 +33,11 @@ calculate_neighbour_percentage(
   The specific value within meta_data_column to highlight and analyze
   neighbours for.
 
-- graph:
+- either:
 
-  Name of the nearest-neighbour graph to use from seu@graphs (e.g.,
-  "RNA_nn", "RNA_snn", or "SCT_nn").
+  a nearest neigbour graph in igraph, dgCMatrix or Seurat format, or the
+  name of a graph stored in the Seurat object. (e.g., "RNA_nn",
+  "RNA_snn", or "SCT_nn").
 
 ## Value
 

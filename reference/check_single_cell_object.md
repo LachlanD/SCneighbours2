@@ -1,26 +1,32 @@
 # check_single_cell_object
 
-Validates that the input object is either a Seurat object or a
-SingleCellExperiment object. Returns a named list containing
-standardized accessors for metadata, graphs, and other components needed
-by package functions.
+Takes a Seurat or SingleCellExperiment object and converts it into a
+scn_object.
 
 ## Usage
 
 ``` r
-check_single_cell_object(obj, graph, reduction = NULL)
+check_single_cell_object(obj, graph = NULL, reduction = NULL)
 ```
 
 ## Arguments
 
 - obj:
 
-  An object to validate (should be either Seurat or
-  SingleCellExperiment).
+  An Seurat or SingleCellExperiment object to convert.
+
+- graph:
+
+  Name of the nearest-neighbour graph to use from seu@graphs (e.g.,
+  "RNA_nn", "RNA_snn", or "SCT_nn").
+
+- reduction:
+
+  Name of the dimensionality reduction to use (default: "umap").
 
 ## Value
 
-A named list with the following elements:
+A S3 scn_object with the following elements:
 
 - `type` - Character string: "Seurat" or "SingleCellExperiment"
 

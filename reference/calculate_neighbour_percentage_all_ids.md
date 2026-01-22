@@ -9,20 +9,16 @@ patterns.
 ## Usage
 
 ``` r
-calculate_neighbour_percentage_all_ids(
-  seu,
-  meta_data_column,
-  graph = "RNA_nn",
-  reduction = NULL
-)
+calculate_neighbour_percentage_all_ids(obj, meta_data_column, graph = "RNA_nn")
 ```
 
 ## Arguments
 
-- seu:
+- obj:
 
-  A Seurat object containing single-cell data with nearest-neighbour
-  graphs stored in the graphs slot.
+  A Seurat, SingleCellExperiment or SCNeighbours object containing
+  single-cell data. If in Seurat or SingleCellExperiment form will
+  firist be converted to SCneighbours format
 
 - meta_data_column:
 

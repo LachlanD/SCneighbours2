@@ -9,25 +9,27 @@ similar spatial distributions or microenvironments.
 ## Usage
 
 ``` r
-visualise_neighbour_percentage(seu, meta_data_column, graph)
+visualise_neighbour_percentage(obj, meta_data_column, graph = NULL)
 ```
 
 ## Arguments
 
-- seu:
+- obj:
 
-  A Seurat object containing single-cell data with nearest-neighbour
-  graphs stored in the graphs slot.
+  A Seurat, SingleCellExperiment or SCNeighbours object containing
+  single-cell data. If in Seurat or SingleCellExperiment form will first
+  be converted to SCneighbours format
 
 - meta_data_column:
 
-  Name of the column in seu@meta.data to pull values from for grouping
-  and analysis.
+  Name of the metadata column in the object to pull values from for
+  identifying the cells of interest.
 
 - graph:
 
-  Name of the nearest-neighbour graph to use from seu@graphs (e.g.,
-  "RNA_nn", "RNA_snn", or "SCT_nn").
+  either a nearest neigbour graph in igraph, dgCMatrix or Seurat format,
+  or the name of a graph stored in the Seurat object. (e.g., "RNA_nn",
+  "RNA_snn", or "SCT_nn").
 
 ## Value
 

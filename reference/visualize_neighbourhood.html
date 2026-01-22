@@ -55,7 +55,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">visualize_neighbourhood</span><span class="op">(</span></span>
-<span>  <span class="va">seu</span>,</span>
+<span>  <span class="va">obj</span>,</span>
 <span>  <span class="va">meta_data_column</span>,</span>
 <span>  <span class="va">meta_data_highlight</span>,</span>
 <span>  reduction <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -69,13 +69,13 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-seu">seu<a class="anchor" aria-label="anchor" href="#arg-seu"></a></dt>
-<dd><p>A Seurat object containing single-cell data with nearest-neighbour
-graphs and dimensionality reductions.</p></dd>
+<dl><dt id="arg-obj">obj<a class="anchor" aria-label="anchor" href="#arg-obj"></a></dt>
+<dd><p>A Seurat, SingleCellExperiment or SCNeighbours object containing single-cell data.
+If in Seurat or SingleCellExperiment form will firist be converted to SCneighbours format</p></dd>
 
 
 <dt id="arg-meta-data-column">meta_data_column<a class="anchor" aria-label="anchor" href="#arg-meta-data-column"></a></dt>
-<dd><p>Name of the column in seu@meta.data to pull values from
+<dd><p>Name of the metadata column in the object to pull values from
 for identifying the cells of interest.</p></dd>
 
 
@@ -95,9 +95,8 @@ simple point highlights (FALSE). Default is FALSE.</p></dd>
 
 
 <dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
-<dd><p>Name of the nearest-neighbour graph to use from seu@graphs
-(default: "RNA_nn"). Use "RNA_snn" for shared nearest neighbours or
-"SCT_nn" if using SCTransform.</p></dd>
+<dd><p>either a nearest neigbour graph in igraph, dgCMatrix or Seurat format, or the name of a graph stored in the Seurat object.
+(e.g., "RNA_nn", "RNA_snn", or "SCT_nn").</p></dd>
 
 
 <dt id="arg-percent">percent<a class="anchor" aria-label="anchor" href="#arg-percent"></a></dt>

@@ -9,7 +9,7 @@ for visualizing the spatial distribution of cell populations.
 
 ``` r
 CalculateContour(
-  seu,
+  obj,
   meta_data_column,
   meta_data_highlight,
   reduction = "umap",
@@ -19,15 +19,16 @@ CalculateContour(
 
 ## Arguments
 
-- seu:
+- obj:
 
-  A Seurat object containing single-cell data with dimensionality
-  reductions stored in the reductions slot.
+  A Seurat, SingleCellExperiment or SCNeighbours object containing
+  single-cell data. If in Seurat or SingleCellExperiment form will first
+  be converted to SCneighbours format
 
 - meta_data_column:
 
-  Name of the column in seu@meta.data to pull values from for subsetting
-  cells.
+  Name of the metadata column in the object to pull values from for
+  identifying the cells of interest.
 
 - meta_data_highlight:
 
